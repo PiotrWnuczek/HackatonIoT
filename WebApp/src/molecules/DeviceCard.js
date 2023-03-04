@@ -1,76 +1,84 @@
-import React, { useState } from 'react';
-import { compose } from 'redux';
-import { connect } from 'react-redux';
-import { removeDevice, removeData, resetData } from 'store/devicesActions';
-import { firebaseConnect } from 'react-redux-firebase';
-import { Typography, LinearProgress, Avatar, Button } from '@mui/material';
-import { Card, CardHeader, CardContent, IconButton } from '@mui/material';
-import { FolderOpen, MoreVert } from '@mui/icons-material';
-import DeviceChart from 'atoms/DeviceChart';
+import React, { useState } from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { removeDevice, removeData, resetData } from "store/devicesActions";
+import { firebaseConnect } from "react-redux-firebase";
+import { Typography, LinearProgress, Avatar, Button } from "@mui/material";
+import { Card, CardHeader, CardContent, IconButton } from "@mui/material";
+import { FolderOpen, MoreVert } from "@mui/icons-material";
+import DeviceChart from "atoms/DeviceChart";
 
-const DeviceCard = ({ removeDevice, removeData, resetData, device, controller }) => {
+const DeviceCard = ({
+  removeDevice,
+  removeData,
+  resetData,
+  device,
+  controller,
+}) => {
   const [options, setOptions] = useState(false);
 
   return (
-    <Card
-      sx={{ borderRadius: 2 }}
-      variant='outlined'
-    >
+    <Card sx={{ borderRadius: 2 }} variant="outlined">
       <CardHeader
-        title={'Name: ' + device.name + ' | Key: ' + device.key}
-        subheader={'Description: ' + device.description}
-        avatar={<Avatar>
-          <FolderOpen />
-        </Avatar>}
-        action={<>
-          {options && <>
-            <Button
-              sx={{ ml: 1 }}
-              onClick={() => {
-                removeDevice(device.id);
-                removeData(device.key);
-              }}
-              variant='outlined'
-              color='error'
-              size='small'
-            >
-              Delete
-            </Button>
-            <Button
-              sx={{ ml: 1 }}
-              onClick={() => resetData(device.key)}
-              variant='outlined'
-              size='small'
-            >
-              Reset
-            </Button>
-          </>}
-          <IconButton
-            onClick={() => setOptions(!options)}
-            size='samll'
-          >
-            <MoreVert />
-          </IconButton>
-        </>}
+        title={"Name: " + device.name + " | Key: " + device.key}
+        subheader={"Description: " + device.description}
+        avatar={
+          <Avatar>
+            <FolderOpen />
+          </Avatar>
+        }
+        action={
+          <>
+            {options && (
+              <>
+                <Button
+                  sx={{ ml: 1 }}
+                  onClick={() => {
+                    removeDevice(device.id);
+                    removeData(device.key);
+                  }}
+                  variant="outlined"
+                  color="error"
+                  size="small"
+                >
+                  Delete
+                </Button>
+                <Button
+                  sx={{ ml: 1 }}
+                  onClick={() => resetData(device.key)}
+                  variant="outlined"
+                  size="small"
+                >
+                  Reset
+                </Button>
+              </>
+            )}
+            <IconButton onClick={() => setOptions(!options)} size="samll">
+              <MoreVert />
+            </IconButton>
+          </>
+        }
       />
       <CardContent>
-        {controller && controller.stamps && <>
-          <Typography>Activations Chart:</Typography>
-          <DeviceChart
-            stamps={Object.values(controller.stamps)}
-          />
-        </>}
-        {controller && controller.level && <>
-          <Typography>Liquid Level:</Typography>
-          <LinearProgress
-            sx={{ mt: 2, height: 5, borderRadius: 5 }}
-            variant='determinate'
-            value={controller.level}
-          />
-        </>}
+        {controller && controller.people && (
+          <>
+            <Typography>Number of people chart:</Typography>
+            <DeviceChart people={Object.values(controller.people)} />
+          </>
+        )}
+        {controller && controller.queue && (
+          <>
+            <Typography>Real time queue:</Typography>
+            <LinearProgress
+              sx={{ mt: 2, height: 5, borderRadius: 5 }}
+              variant="determinate"
+              value={controller.queue}
+            />
+          </>
+        )}
       </CardContent>
     </Card>
-  )
+  );
 };
 
 const mapStateToProps = (state, props) => ({
@@ -85,5 +93,5 @@ const mapDispatchToProps = (dispatch) => ({
 
 export default compose(
   connect(mapStateToProps, mapDispatchToProps),
-  firebaseConnect(props => [props.device.key]),
+  firebaseConnect((props) => [props.device.key])
 )(DeviceCard);

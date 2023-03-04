@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { signoutUser } from 'store/usersActions';
-import { useNavigate, useLocation } from 'react-router-dom';
-import { Drawer, Avatar, List, ListItem, Typography } from '@mui/material';
-import { ListItemText, ListItemAvatar } from '@mui/material';
-import { Dashboard, Logout } from '@mui/icons-material';
-import CreateDialog from 'molecules/CreateDialog';
+import React from "react";
+import { connect } from "react-redux";
+import { signoutUser } from "store/usersActions";
+import { useNavigate, useLocation } from "react-router-dom";
+import { Drawer, Avatar, List, ListItem, Typography } from "@mui/material";
+import { ListItemText, ListItemAvatar } from "@mui/material";
+import { Dashboard, Logout } from "@mui/icons-material";
+import CreateDialog from "molecules/CreateDialog";
 
 const SideBar = ({ signoutUser, auth, ...props }) => {
   const navigate = useNavigate();
@@ -15,41 +15,39 @@ const SideBar = ({ signoutUser, auth, ...props }) => {
     <Drawer {...props}>
       <List>
         <ListItem sx={{ mb: 12 }}>
-          <Typography variant='h5'>
-            MERFLIP
-          </Typography>
+          <Typography variant="h5">TIME THIEVES</Typography>
         </ListItem>
         <ListItem
-          sx={{ textTransform: 'uppercase' }}
-          selected={location.pathname === '/board'}
-          onClick={() => navigate('/board')}
+          sx={{ textTransform: "uppercase" }}
+          selected={location.pathname === "/board"}
+          onClick={() => navigate("/board")}
           button
         >
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: 'primary.main' }}>
+            <Avatar sx={{ bgcolor: "primary.main" }}>
               <Dashboard />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText secondary='Board' />
+          <ListItemText secondary="Board" />
         </ListItem>
         <CreateDialog />
       </List>
       <List>
         <ListItem
-          sx={{ textTransform: 'uppercase', whiteSpace: 'nowrap' }}
+          sx={{ textTransform: "uppercase", whiteSpace: "nowrap" }}
           onClick={signoutUser}
           button
         >
           <ListItemAvatar>
-            <Avatar sx={{ bgcolor: 'primary.main' }}>
+            <Avatar sx={{ bgcolor: "primary.main" }}>
               <Logout />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText secondary='Sign Out' />
+          <ListItemText secondary="Sign Out" />
         </ListItem>
       </List>
     </Drawer>
-  )
+  );
 };
 
 const mapStateToProps = (state) => ({
@@ -60,5 +58,4 @@ const mapDispatchToPorps = (dispatch) => ({
   signoutUser: () => dispatch(signoutUser()),
 });
 
-export default connect(mapStateToProps, mapDispatchToPorps)
-  (SideBar);
+export default connect(mapStateToProps, mapDispatchToPorps)(SideBar);

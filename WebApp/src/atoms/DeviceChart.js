@@ -1,20 +1,23 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
-import { LineChart, ResponsiveContainer } from 'recharts';
-import { Line, XAxis, YAxis } from 'recharts';
+import React from "react";
+import { Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
+import { LineChart, ResponsiveContainer } from "recharts";
+import { Line, XAxis, YAxis } from "recharts";
 
-const DeviceChart = ({ stamps }) => {
+const DeviceChart = ({ people }) => {
   const theme = useTheme();
 
-  const hours = stamps && stamps.map(date => new Date(date).getHours());
+  const hours = people && people.map((date) => new Date(date).getHours());
   let data = [];
 
   for (let i = 0; i <= 24; i++) {
-    data = [...data, {
-      time: i < 10 ? '0' + i + ':00' : i + ':00',
-      amount: hours && hours.filter(x => x === i).length
-    }]
+    data = [
+      ...data,
+      {
+        time: i < 10 ? "0" + i + ":00" : i + ":00",
+        amount: hours && hours.filter((x) => x === i).length,
+      },
+    ];
   }
 
   return (
@@ -25,7 +28,7 @@ const DeviceChart = ({ stamps }) => {
           margin={{ top: 10, right: 20, bottom: 10, left: -20 }}
         >
           <XAxis
-            dataKey='time'
+            dataKey="time"
             stroke={theme.palette.text.secondary}
             style={theme.typography.body1}
           />
@@ -33,11 +36,10 @@ const DeviceChart = ({ stamps }) => {
             allowDecimals={false}
             stroke={theme.palette.text.secondary}
             style={theme.typography.body1}
-          >
-          </YAxis>
+          ></YAxis>
           <Line
-            type='monotone'
-            dataKey='amount'
+            type="monotone"
+            dataKey="amount"
             stroke={theme.palette.primary.main}
             isAnimationActive={false}
             dot={false}
@@ -45,7 +47,7 @@ const DeviceChart = ({ stamps }) => {
         </LineChart>
       </ResponsiveContainer>
     </Box>
-  )
+  );
 };
 
 export default DeviceChart;
