@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/HackatonIoT/static/css/main.253b4334.css",
+    "main.js": "/HackatonIoT/static/js/main.a0c99722.js",
+    "service-worker.js": "/HackatonIoT/service-worker.js",
+    "index.html": "/HackatonIoT/index.html",
+    "main.253b4334.css.map": "/HackatonIoT/static/css/main.253b4334.css.map",
+    "main.a0c99722.js.map": "/HackatonIoT/static/js/main.a0c99722.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.253b4334.css",
+    "static/js/main.a0c99722.js"
+  ]
+}
