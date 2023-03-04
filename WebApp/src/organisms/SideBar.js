@@ -15,7 +15,7 @@ const SideBar = ({ signoutUser, auth, ...props }) => {
     <Drawer {...props}>
       <List>
         <ListItem sx={{ mb: 12 }}>
-          <Typography variant="h5">TIME THIEVES</Typography>
+          <Typography variant="h5">ZłODZIEJE CZASU</Typography>
         </ListItem>
         <ListItem
           sx={{ textTransform: "uppercase" }}
@@ -28,7 +28,7 @@ const SideBar = ({ signoutUser, auth, ...props }) => {
               <Dashboard />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText secondary="Board" />
+          <ListItemText secondary="Tablica Miejsc" />
         </ListItem>
         <CreateDialog />
       </List>
@@ -43,7 +43,7 @@ const SideBar = ({ signoutUser, auth, ...props }) => {
               <Logout />
             </Avatar>
           </ListItemAvatar>
-          <ListItemText secondary="Sign Out" />
+          <ListItemText secondary="Wyloguj się" />
         </ListItem>
       </List>
     </Drawer>

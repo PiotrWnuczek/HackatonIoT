@@ -4,18 +4,22 @@ import { useTheme } from "@mui/material/styles";
 import { LineChart, ResponsiveContainer } from "recharts";
 import { Line, XAxis, YAxis } from "recharts";
 
-const DeviceChart = ({ people }) => {
+const DeviceChart = ({ plus, minus }) => {
   const theme = useTheme();
 
-  const hours = people && people.map((date) => new Date(date).getHours());
+  const plusHours = plus && plus.map((date) => new Date(date).getHours());
+  const minusHours = minus && minus.map((date) => new Date(date).getHours());
   let data = [];
 
   for (let i = 0; i <= 24; i++) {
+    const plusAmount = plusHours && plusHours.filter((x) => x === i).length;
+    const minusAmount = minusHours && minusHours.filter((x) => x === i).length;
+
     data = [
       ...data,
       {
         time: i < 10 ? "0" + i + ":00" : i + ":00",
-        amount: hours && hours.filter((x) => x === i).length,
+        amount: plusAmount - minusAmount,
       },
     ];
   }

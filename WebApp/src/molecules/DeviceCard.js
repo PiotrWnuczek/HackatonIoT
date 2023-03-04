@@ -5,7 +5,7 @@ import { removeDevice, removeData, resetData } from "store/devicesActions";
 import { firebaseConnect } from "react-redux-firebase";
 import { Typography, LinearProgress, Avatar, Button } from "@mui/material";
 import { Card, CardHeader, CardContent, IconButton } from "@mui/material";
-import { FolderOpen, MoreVert } from "@mui/icons-material";
+import { Place, MoreVert } from "@mui/icons-material";
 import DeviceChart from "atoms/DeviceChart";
 
 const DeviceCard = ({
@@ -20,11 +20,22 @@ const DeviceCard = ({
   return (
     <Card sx={{ borderRadius: 2 }} variant="outlined">
       <CardHeader
-        title={"Name: " + device.name + " | Key: " + device.key}
-        subheader={"Description: " + device.description}
+        title={
+          <>
+            <Typography variant="h6" sx={{ fontWeight: 600 }}>
+              Miejsce: {device.name}
+            </Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+              Opis: {device.description}
+            </Typography>
+          </>
+        }
+        subheader={
+          <Typography sx={{ fontWeight: 600 }}>Key: {device.key}</Typography>
+        }
         avatar={
           <Avatar>
-            <FolderOpen />
+            <Place />
           </Avatar>
         }
         action={
@@ -60,19 +71,28 @@ const DeviceCard = ({
         }
       />
       <CardContent>
-        {controller && controller.people && (
+        {controller && (
           <>
-            <Typography>Number of people chart:</Typography>
-            <DeviceChart people={Object.values(controller.people)} />
-          </>
-        )}
-        {controller && controller.queue && (
-          <>
-            <Typography>Real time queue:</Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+              Ilość ludzi w poszczególnych godzinach:
+            </Typography>
+            <DeviceChart
+              plus={Object.values(controller.plus ?? 0)}
+              minus={Object.values(controller.minus ?? 0)}
+            />
+            <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+              Ilość osób czekających w kolejce: {controller.queue ?? 0} osób
+            </Typography>
+            <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
+              Przewidywany czas oczekiwania: {(controller.queue ?? 0) * 5} minut
+            </Typography>
+            <Typography variant="subtitle1" sx={{ mt: 2, fontWeight: 600 }}>
+              Długość kolejki w czasie rzeczywistym:
+            </Typography>
             <LinearProgress
-              sx={{ mt: 2, height: 5, borderRadius: 5 }}
+              sx={{ mt: 2, height: 10, borderRadius: 10 }}
               variant="determinate"
-              value={controller.queue}
+              value={controller.queue ?? 0}
             />
           </>
         )}
