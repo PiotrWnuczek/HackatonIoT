@@ -1,6 +1,6 @@
 {
-  "name": "smart-device",
-  "homepage": "https://PiotrWnuczek.github.io/SmartDevice",
+  "name": "hackaton-iot",
+  "homepage": "https://PiotrWnuczek.github.io/HackatonIoT",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
