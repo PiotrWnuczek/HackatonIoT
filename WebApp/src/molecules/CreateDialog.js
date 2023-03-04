@@ -34,6 +34,7 @@ const CreateDialog = ({ createDevice }) => {
               key: "",
               name: "",
               description: "",
+              location: "",
             }}
             onSubmit={(values) => {
               createDevice(values);
@@ -66,6 +67,16 @@ const CreateDialog = ({ createDevice }) => {
                   value={values.description}
                   label="Description"
                   name="description"
+                  type="text"
+                  size="small"
+                  rows={2}
+                  multiline
+                />
+                <TextInput
+                  onChange={handleChange}
+                  value={values.location}
+                  label="Location"
+                  name="location"
                   type="text"
                   size="small"
                   rows={2}

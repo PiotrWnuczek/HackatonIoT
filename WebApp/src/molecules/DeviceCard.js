@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { removeDevice, removeData, resetData } from "store/devicesActions";
 import { firebaseConnect } from "react-redux-firebase";
 import { Typography, LinearProgress, Avatar, Button } from "@mui/material";
-import { Card, CardHeader, CardContent, IconButton } from "@mui/material";
+import { Box, Card, CardHeader, CardContent, IconButton } from "@mui/material";
 import { Place, MoreVert } from "@mui/icons-material";
 import DeviceChart from "atoms/DeviceChart";
 
@@ -71,6 +71,10 @@ const DeviceCard = ({
         }
       />
       <CardContent>
+        <Box
+          sx={{ mb: 3 }}
+          dangerouslySetInnerHTML={{ __html: device.location ?? "" }}
+        />
         {controller && (
           <>
             <Typography variant="subtitle1" sx={{ fontWeight: 600 }}>
@@ -92,7 +96,7 @@ const DeviceCard = ({
             <LinearProgress
               sx={{ mt: 2, height: 10, borderRadius: 10 }}
               variant="determinate"
-              value={controller.queue ?? 0}
+              value={(controller.queue ?? 0) * 10}
             />
           </>
         )}
